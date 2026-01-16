@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RocketDev — Custom Websites in 48 Hours</title>
+    <meta name="description" content="High-performance landing pages and web apps developed in 2 days. Starting at $199.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gorocket.site/">
+    <meta property="og:title" content="RocketDev — Premium Web Development">
+    <meta property="og:description" content="Turnkey websites. Python & JS Stack. Delivered in 48 hours.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Manrope', sans-serif; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #667eea #0f172a;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Rocket Animation */
+        .rocket-logo {
+            display: inline-block;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.5));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(-2deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        .rocket-logo:hover { animation: launch 0.8s forwards; }
+
+        @keyframes launch {
+            0% { transform: translateY(0px) scale(1) rotate(0deg); opacity: 1; }
+            40% { transform: translateY(-20px) scale(1.1) rotate(5deg); opacity: 1; }
+            100% { transform: translateY(-300px) scale(1.3) rotate(15deg); opacity: 0; }
+        }
+
+        /* Warning Zone Pulse */
+        .warning-zone { animation: pulse-border 2s ease-in-out infinite; }
+
+        @keyframes pulse-border {
+            0%, 100% { border-color: rgba(239, 68, 68, 0.3); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            50% { border-color: rgba(239, 68, 68, 0.6); box-shadow: 0 0 20px 5px rgba(239, 68, 68, 0.3); }
+        }
+
+        .mobile-sticky-btn {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Stars Background */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Tech Stack Marquee */
+        .marquee {
+            overflow: hidden;
+            position: relative;
+            background: rgba(15, 23, 42, 0.5);
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .marquee-content {
+            display: flex;
+            animation: scroll 30s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            white-space: nowrap;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Pricing Card Glow */
+        .pricing-card {
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.4);
+            transform: translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        /* FAQ Accordion Fixed */
+        .faq-item {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            background: rgba(15, 23, 42, 0.4);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(167, 139, 250, 0.3);
+            background: rgba(15, 23, 42, 0.6);
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            opacity: 1;
+            padding-bottom: 1.5rem;
+        }
+
+        .faq-item.active .faq-question {
+            color: #c084fc;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.25rem;
+            color: #94a3b8;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+            color: #c084fc;
+        }
+
+        /* Modal Styles */
+        #orderModal { transition: opacity 0.3s ease; }
+        #orderModal.hidden { pointer-events: none; opacity: 0; }
+        #orderModal:not(.hidden) { pointer-events: auto; opacity: 1; }
+
+        /* Portfolio Card Glow */
+        .portfolio-card:hover {
+            box-shadow: 0 0 30px rgba(234, 179, 8, 0.3);
+        }
+
+        /* Enhanced Input Focus Effects */
+        .form-input {
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #a855f7;
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.3), 0 0 20px rgba(168, 85, 247, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .form-input:valid {
+            border-color: #10b981;
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+        }
+
+        .form-input:focus:valid {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3), 0 0 15px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Telegram Button */
+        .telegram-btn {
+            position: fixed;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #0088cc, #00aced);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 136, 204, 0.5);
+            transition: all 0.3s ease;
+            z-index: 50;
+            cursor: pointer;
+        }
+
+        .telegram-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 6px 30px rgba(0, 136, 204, 0.7);
+        }
+
+        .telegram-btn svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        @media (max-width: 640px) {
+            .telegram-btn {
+                bottom: 6rem;
+                width: 56px;
+                height: 56px;
+            }
+
+            .telegram-btn svg {
+                width: 28px;
+                height: 28px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-gray-100 antialiased pb-20 sm:pb-0 relative overflow-x-hidden">
+
+    <div class="stars-container" id="starsContainer"></div>
+
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <span class="rocket-logo relative">🚀</span>
+                    <span class="text-xl font-bold gradient-text hidden sm:block">RocketDev</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center bg-slate-900 rounded-lg p-1 border border-white/10">
+                        <button onclick="setCurrency('USD')" id="btn-usd" class="px-3 py-1 rounded-md text-sm font-bold transition-all bg-purple-600 text-white shadow-lg">USD</button>
+                        <button onclick="setCurrency('EUR')" id="btn-eur" class="px-3 py-1 rounded-md text-sm font-bold transition-all text-gray-400 hover:text-white">EUR</button>
+                    </div>
+                    <button onclick="openModal()" class="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg font-semibold hover:opacity-90 transition text-sm hidden sm:block">
+                        Start Project
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-transparent"></div>
+        <div class="max-w-6xl mx-auto text-center relative z-10">
+            <div class="inline-block mb-6 px-4 py-2 glass rounded-full text-sm font-medium">
+                🚀 Web Development Studio
+            </div>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight">
+                Websites engineered for <br>
+                <span class="gradient-text">Business Growth</span>
+            </h1>
+            <p class="text-xl sm:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto">
+                Landing Pages from <span class="text-white font-bold price-landing">$199</span>.
+                Web Apps from <span class="text-white font-bold price-shop">$499</span>.
+                <br>Turnkey solutions: Design, Code, Hosting & Domain.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 glass rounded-xl font-bold text-lg hover:bg-white/10 transition">View Portfolio</a>
+                <button onclick="openModal()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-bold text-lg hover:scale-105 transition transform shadow-lg shadow-purple-500/50">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="marquee py-4 relative z-10">
+        <div class="marquee-content">
+            <div class="tech-item">⚡ HTML5</div>
+            <div class="tech-item">🎨 CSS3</div>
+            <div class="tech-item">🐍 Python</div>
+            <div class="tech-item">⚙️ Nginx</div>
+            <div class="tech-item">🐧 Linux</div>
+            <div class="tech-item">💬 Telegram API</div>
+            <div class="tech-item">🔒 SSL</div>
+            <div class="tech-item">🚀 JavaScript</div>
+            <div class="tech-item">⚡ HTML5</div>
+            <div class="tech-item">🎨 CSS3</div>
+            <div class="tech-item">🐍 Python</div>
+            <div class="tech-item">⚙️ Nginx</div>
+            <div class="tech-item">🐧 Linux</div>
+            <div class="tech-item">💬 Telegram API</div>
+            <div class="tech-item">🔒 SSL</div>
+            <div class="tech-item">🚀 JavaScript</div>
+        </div>
+    </section>
+
+    <section class="py-12 px-4 sm:px-6 lg:px-8 border-y border-white/5 bg-slate-900/50 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8 text-center relative">
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-purple-500/0 via-purple-500/30 to-purple-500/0 -translate-y-1/2 z-0"></div>
+                <div class="relative z-10">
+                    <div class="w-16 h-16 mx-auto bg-slate-800 rounded-2xl flex items-center justify-center text-3xl mb-4 border border-purple-500/30 shadow-lg shadow-purple-500/20">📝</div>
+                    <h3 class="text-xl font-bold mb-2">1. Request</h3>
+                    <p class="text-gray-400 text-sm">Get your order ID instantly.</p>
+                </div>
+                <div class="relative z-10">
+                    <div class="w-16 h-16 mx-auto bg-slate-800 rounded-2xl flex items-center justify-center text-3xl mb-4 border border-purple-500/30 shadow-lg shadow-purple-500/20">💳</div>
+                    <h3 class="text-xl font-bold mb-2">2. Payment</h3>
+                    <p class="text-gray-400 text-sm">Secure transaction.</p>
+                </div>
+                <div class="relative z-10">
+                    <div class="w-16 h-16 mx-auto bg-slate-800 rounded-2xl flex items-center justify-center text-3xl mb-4 border border-green-500/30 shadow-lg shadow-green-500/20">🚀</div>
+                    <h3 class="text-xl font-bold mb-2">3. Launch</h3>
+                    <p class="text-gray-400 text-sm">We code and deploy in 48h.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl sm:text-5xl font-bold text-center mb-4">Latest <span class="gradient-text">Projects</span></h2>
+            <div class="grid md:grid-cols-2 gap-8 mt-12">
+                <div class="portfolio-card glass rounded-3xl overflow-hidden border border-white/5 hover:border-yellow-500/50 transition group">
+                    <div class="h-64 bg-slate-800 relative overflow-hidden">
+                        <img src="3214.png" alt="Industrial Equipment Rental" class="w-full h-full object-cover transition duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                        <div class="absolute top-4 left-4 bg-yellow-600 text-white px-3 py-1 rounded-full text-xs font-bold">Industrial</div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-2">Masheka Crane Rental</h3>
+                        <p class="text-gray-400 text-sm mb-4">Corporate Landing Page. Delivered in 48 hours.</p>
+                        <a href="https://trofimovby.github.io/crantest/" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-yellow-500/50 rounded-lg text-sm font-semibold transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            View Live Site
+                        </a>
+                    </div>
+                </div>
+                <div class="glass rounded-3xl p-8 border border-white/5 flex flex-col justify-center items-center text-center relative overflow-hidden group">
+                    <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition text-4xl">✨</div>
+                    <h3 class="text-2xl font-bold mb-2">Your Project Here</h3>
+                    <p class="text-gray-400 mb-6">Join our list of happy clients.</p>
+                    <button onclick="openModal()" class="px-6 py-3 border border-purple-500/50 rounded-xl text-purple-300 hover:bg-purple-500 hover:text-white transition">Book a Slot</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-4 sm:px-6 lg:px-8 border-y border-white/5 bg-slate-900/30 relative z-10">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl sm:text-5xl font-bold text-center mb-12">Client <span class="gradient-text">Feedback</span></h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="glass rounded-2xl p-6 border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-xl font-bold">M</div>
+                        <div>
+                            <div class="font-bold">Michael K.</div>
+                            <div class="text-xs text-gray-400">CEO, Logistics</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm">"Ordered a landing page for my rental business. Alex delivered it in 2 days, clean code, no bloat. Calls started coming in immediately."</p>
+                </div>
+                <div class="glass rounded-2xl p-6 border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-xl font-bold">S</div>
+                        <div>
+                            <div class="font-bold">Sarah J.</div>
+                            <div class="text-xs text-gray-400">Shop Owner</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm">"I needed a simple catalog site. The price was unbeatable for the quality. Now I don't depend solely on Instagram."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl sm:text-5xl font-bold text-center mb-16">Pricing</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="pricing-card glass rounded-3xl p-8 border border-white/5 flex flex-col">
+                    <div class="text-sm font-semibold text-purple-400 mb-2">QUICK START</div>
+                    <h3 class="text-3xl font-bold mb-2">Landing Page</h3>
+                    <div class="flex items-baseline gap-2 mb-6">
+                        <span class="text-5xl font-extrabold price-landing-num">199</span>
+                        <span class="text-2xl text-gray-400 currency-label">USD</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 flex-1 text-gray-300">
+                        <li class="flex gap-3"><span class="text-green-500">✓</span> Single Page Website</li>
+                        <li class="flex gap-3"><span class="text-green-500">✓</span> Responsive (Mobile Ready)</li>
+                        <li class="flex gap-3"><span class="text-green-500">✓</span> Free Domain & Hosting</li>
+                    </ul>
+                    <button onclick="openModal('Landing')" class="block w-full py-4 bg-purple-600 hover:bg-purple-700 rounded-xl font-bold text-center transition">Order Landing</button>
+                </div>
+                <div class="pricing-card glass rounded-3xl p-8 border-2 border-purple-500/50 relative flex flex-col">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-sm font-bold shadow-lg">BEST SELLER</div>
+                    <div class="text-sm font-semibold text-pink-400 mb-2">FOR BUSINESS</div>
+                    <h3 class="text-3xl font-bold mb-2">Web App / Shop</h3>
+                    <div class="flex items-baseline gap-2 mb-6">
+                        <span class="text-5xl font-extrabold price-shop-num">499</span>
+                        <span class="text-2xl text-gray-400 currency-label">USD</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 flex-1 text-gray-300">
+                        <li class="flex gap-3"><span class="text-green-500">✓</span> Everything in «Landing»</li>
+                        <li class="flex gap-3"><span class="text-green-500">✓</span> Catalog / CMS Integration</li>
+                        <li class="flex gap-3"><span class="text-green-500">✓</span> Admin Panel</li>
+                    </ul>
+                    <button onclick="openModal('Shop')" class="block w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 rounded-xl font-bold text-center transition">Order Shop</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="warning-zone bg-red-900/20 backdrop-blur-sm rounded-3xl p-6 sm:p-10 border-2 border-red-500/30">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-4xl">⚖️</span>
+                    <h2 class="text-3xl font-bold text-red-400">Fair Use Policy</h2>
+                </div>
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="flex-1">
+                        <p class="text-gray-200 text-lg">
+                            We keep prices low by following the <span class="text-white font-bold">Brief strictly</span>.
+                        </p>
+                        <p class="text-gray-400 text-sm mt-2">
+                            Any changes requested after the final delivery that were not specified in the original Brief will be charged at our standard hourly rate.
+                        </p>
+                    </div>
+                    <div class="glass p-4 rounded-xl border border-red-500/40 text-center min-w-[180px]">
+                        <div class="text-sm text-red-300 font-bold">HOURLY RATE</div>
+                        <div class="text-2xl font-extrabold text-red-400 price-edit">$40</div>
+                        <div class="text-xs text-gray-500">per hour</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-4xl sm:text-5xl font-bold text-center mb-4">FAQ</h2>
+            <p class="text-center text-gray-400 mb-12">Straight answers.</p>
+
+            <div class="space-y-4">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span class="text-lg">Why are the prices so competitive?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                            I operate as a solo-engineer studio. No expensive office, no sales managers, no corporate bloat. You pay strictly for code and development time.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span class="text-lg">Is this a generic builder (Wix/WP)?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                            No. This is custom code (HTML, CSS, JS, Python). Hand-coded websites perform significantly better in Google (SEO) and load instantly compared to heavy page builders.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span class="text-lg">Who owns the domain and code?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                            You do. 100%. I register the domain in your name. Upon completion, I transfer all credentials, source code, and assets to you. No vendor lock-in.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span class="text-lg">What if something breaks?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                            I provide a 14-day warranty period. If any technical bug occurs (that isn't caused by third-party interference), I will fix it immediately for free.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span class="text-lg">Can I scale the project later?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                            Absolutely. Since the code is clean and standard-compliant, any developer can pick it up. Or you can come back to me for new features.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span class="text-lg">How does payment work?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                            I accept secure online payments. For international clients, we use reliable payment gateways to ensure transaction safety.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-4 sm:px-6 lg:px-8 border-t border-white/5 bg-slate-900/30 relative z-10">
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center gap-8">
+            <div class="w-32 h-32 rounded-full bg-slate-800 overflow-hidden flex-shrink-0 border-2 border-purple-500/30">
+                 <img src="photo.jpg" alt="Alex Trofimov" class="w-full h-full object-cover">
+            </div>
+            <div class="text-center sm:text-left">
+                <h2 class="text-2xl font-bold mb-1">Alex Trofimov</h2>
+                <p class="text-purple-400 font-medium mb-4">Full Stack Engineer</p>
+                <div class="text-gray-300 leading-relaxed space-y-2">
+                    <p>4 years of experience. B.S. in Computer Science.</p>
+                    <p>I've streamlined the development process: no endless meetings, no bureaucracy. Just your requirements turned into clean, working code in 48 hours.</p>
+                    <p class="text-sm text-gray-500">I handle everything: from domain registration to server configuration. You get a ready-to-launch product.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 px-4 sm:px-6 lg:px-8 border-t border-gray-800 text-center relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <p class="text-gray-400 text-sm">© 2026 RocketDev. All rights reserved.</p>
+            <div class="mt-2 text-xs text-gray-600">
+                <a href="#" class="hover:text-white transition">Privacy Policy</a> • <a href="#" class="hover:text-white transition">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://t.me/trofimovby" target="_blank" rel="noopener noreferrer" class="telegram-btn" aria-label="Contact via Telegram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18.717-2.146 10.139-2.146 10.139s-.119.478-.537.478c-.178 0-.357-.089-.537-.268l-3.671-2.864-1.432-1.073-2.146-1.61c-.417-.313-.447-.626.09-.894l11.262-4.299c.537-.209.984.09.806.806z"/>
+        </svg>
+    </a>
+
+    <div class="fixed bottom-0 left-0 w-full p-4 sm:hidden z-40 mobile-sticky-btn border-t border-white/10">
+        <button onclick="openModal()" class="block w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-bold text-center text-white shadow-lg">
+            Start Project
+        </button>
+    </div>
+
+    <div id="orderModal" class="fixed inset-0 z-[100] flex items-center justify-center hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()"></div>
+
+        <div class="relative bg-slate-900 border border-purple-500/30 rounded-2xl p-8 w-full max-w-md mx-4 shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl leading-none">✕</button>
+
+            <div id="formState">
+                <h2 class="text-2xl font-bold mb-2">Let's Rocket 🚀</h2>
+                <p class="text-gray-400 mb-6 text-sm">Create an order to get started.</p>
+                <form onsubmit="generateOrder(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Your Name</label>
+                        <input type="text" id="clientName" required class="form-input w-full bg-slate-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500" placeholder="Alex">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Service</label>
+                        <select id="clientType" class="form-input w-full bg-slate-800 border border-gray-700 rounded-lg px-4 py-3 text-white">
+                            <option value="Landing">Landing Page ($199)</option>
+                            <option value="Shop">Web App / Shop ($499)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-purple-600 hover:bg-purple-700 rounded-xl font-bold text-lg mt-4 transition">Generate Order ID</button>
+                </form>
+            </div>
+
+            <div id="successState" class="hidden text-center">
+                <div class="w-16 h-16 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">✓</div>
+                <h3 class="text-xl font-bold text-gray-400 mb-2">Order Created!</h3>
+
+                <div class="bg-slate-800 rounded-lg p-4 mb-6 border border-white/10">
+                    <p class="text-xs text-gray-500 uppercase tracking-widest mb-1">Your Order ID</p>
+                    <p class="text-3xl font-extrabold text-white tracking-wider" id="displayOrderId">RS-XXXX</p>
+                    <p class="text-xs text-gray-500 mt-2">Save this for the payment note</p>
+                </div>
+
+                <div class="space-y-3">
+                    <a href="#" id="linkPayment" target="_blank" class="block w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-bold text-white hover:opacity-90 transition">
+                        💳 1. Secure Payment
+                    </a>
+
+                    <a href="#" id="linkBrief" target="_blank" class="block w-full py-3 bg-slate-800 border border-green-500/50 text-green-400 hover:bg-green-500/10 rounded-xl font-bold transition">
+                        📝 2. Fill the Brief
+                    </a>
+                </div>
+                <p class="text-xs text-gray-500 mt-4">Please include your Order ID in the payment comment.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // NOTE: For Western markets, avoid DonationAlerts if possible.
+        // Use Stripe Payment Link or PayPal.me for better conversion.
+        const DONATION_LINK = 'https://www.donationalerts.com/r/rocketsite';
+        const FORM_LINK_TEMPLATE = 'brief.html?order=ORDER_ID'
+
+        function generateStars() {
+            const container = document.getElementById('starsContainer');
+            const starCount = 100;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.opacity = Math.random() * 0.5 + 0.3;
+                container.appendChild(star);
+            }
+        }
+
+        const modal = document.getElementById('orderModal');
+        const formState = document.getElementById('formState');
+        const successState = document.getElementById('successState');
+
+        function openModal(siteType) {
+            modal.classList.remove('hidden');
+            if(siteType) document.getElementById('clientType').value = siteType;
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            setTimeout(() => {
+                formState.classList.remove('hidden');
+                successState.classList.add('hidden');
+                document.getElementById('displayOrderId').innerText = 'RS-XXXX';
+            }, 300);
+        }
+
+        function generateOrder(e) {
+            e.preventDefault();
+
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            const orderId = `RS-${randomNum}`;
+
+            document.getElementById('displayOrderId').innerText = orderId;
+            document.getElementById('linkPayment').href = DONATION_LINK;
+
+            const finalFormLink = FORM_LINK_TEMPLATE.replace('ORDER_ID', orderId);
+            document.getElementById('linkBrief').href = finalFormLink;
+
+            formState.classList.add('hidden');
+            successState.classList.remove('hidden');
+        }
+
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            const isActive = item.classList.contains('active');
+
+            document.querySelectorAll('.faq-item').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+
+        const prices = {
+            USD: { landing: '$199', landingNum: '199', shop: '$499', shopNum: '499', edit: '$40', label: 'USD', domain: '.com' },
+            EUR: { landing: '€189', landingNum: '189', shop: '€469', shopNum: '469', edit: '€35', label: 'EUR', domain: '.eu' }
+        };
+
+        function setCurrency(currency) {
+            const data = prices[currency];
+            document.querySelectorAll('.price-landing').forEach(el => el.innerText = data.landing);
+            document.querySelectorAll('.price-landing-num').forEach(el => el.innerText = data.landingNum);
+            document.querySelectorAll('.price-shop').forEach(el => el.innerText = data.shop);
+            document.querySelectorAll('.price-shop-num').forEach(el => el.innerText = data.shopNum);
+            document.querySelectorAll('.price-edit').forEach(el => el.innerText = data.edit);
+            document.querySelectorAll('.currency-label').forEach(el => el.innerText = data.label);
+            document.querySelectorAll('.domain-zone').forEach(el => el.innerText = data.domain);
+
+            const btnUsd = document.getElementById('btn-usd');
+            const btnEur = document.getElementById('btn-eur');
+
+            if (currency === 'USD') {
+                btnUsd.className = 'px-3 py-1 rounded-md text-sm font-bold transition-all bg-purple-600 text-white shadow-lg';
+                btnEur.className = 'px-3 py-1 rounded-md text-sm font-bold transition-all text-gray-400 hover:text-white';
+            } else {
+                btnEur.className = 'px-3 py-1 rounded-md text-sm font-bold transition-all bg-purple-600 text-white shadow-lg';
+                btnUsd.className = 'px-3 py-1 rounded-md text-sm font-bold transition-all text-gray-400 hover:text-white';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            generateStars();
+        });
+    </script>
+</body>
+</html>
