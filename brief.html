@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Launch Brief — RocketDev</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Manrope', sans-serif; }
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .form-section {
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .form-label {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #e2e8f0;
+        }
+        .form-sublabel {
+            display: block;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: white;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: #a855f7;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+            background: rgba(15, 23, 42, 1);
+        }
+        /* Stars Background */
+        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; background: #020617; }
+        .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; opacity: 0.3; }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            z-index: 100;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #9333ea, #ec4899);
+            width: 0%;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body class="text-gray-100 antialiased min-h-screen">
+
+    <div class="stars-container" id="starsContainer"></div>
+    <div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+
+    <div class="max-w-4xl mx-auto px-4 py-12">
+        <div class="text-center mb-12">
+            <a href="index.html" class="inline-block text-4xl mb-4 hover:scale-110 transition">🚀</a>
+            <h1 class="text-3xl sm:text-4xl font-bold mb-4">Project Launch Brief</h1>
+            <p class="text-gray-400 max-w-2xl mx-auto">
+                To help us build your perfect website <b>without unnecessary meetings</b>, please fill out this questionnaire as detailed as possible.
+            </p>
+        </div>
+
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" id="briefForm">
+
+            <div class="form-section">
+                <h2 class="text-xl font-bold text-purple-400 mb-6 flex items-center gap-2">
+                    <span class="bg-purple-500/20 w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
+                    Contact Details
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="form-label">Order ID *</label>
+                        <input type="text" name="OrderID" id="orderIdField" required readonly class="form-input bg-slate-900/50 text-gray-500 cursor-not-allowed">
+                    </div>
+                    <div>
+                        <label class="form-label">Your Name *</label>
+                        <input type="text" name="ClientName" required class="form-input" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label class="form-label">Preferred Communication *</label>
+                        <select name="MessengerType" class="form-select">
+                            <option>Email (Priority)</option>
+                            <option>Telegram</option>
+                            <option>WhatsApp</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Email or Username *</label>
+                        <input type="text" name="Contact" required class="form-input" placeholder="john@example.com or @username">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2 class="text-xl font-bold text-purple-400 mb-6 flex items-center gap-2">
+                    <span class="bg-purple-500/20 w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span>
+                    Business & Strategy
+                </h2>
+                <div class="space-y-6">
+                    <div>
+                        <label class="form-label">What is your business niche? *</label>
+                        <input type="text" name="Niche" required class="form-input" placeholder="E.g., Car Rental in Miami / Online Bakery">
+                    </div>
+
+                    <div>
+                        <label class="form-label">Unique Selling Proposition (USP) *</label>
+                        <span class="form-sublabel">Why should clients buy from YOU? (Speed, price, experience)</span>
+                        <textarea name="Advantages" rows="4" required class="form-textarea" placeholder="1. 24/7 Support&#10;2. Delivery in 30 mins&#10;3. Prices 10% lower than market..."></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">Target Geography *</label>
+                        <input type="text" name="Geo" required class="form-input" placeholder="New York Only / USA / Europe / Global">
+                    </div>
+
+                    <div>
+                        <label class="form-label">Target Audience</label>
+                        <span class="form-sublabel">Who pays the money? Age, gender, interests.</span>
+                        <textarea name="TargetAudience" rows="2" class="form-textarea" placeholder="Men 30-50, car owners, middle income..."></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">Tone of Voice</label>
+                        <select name="ToneOfVoice" class="form-select">
+                            <option>Professional & Formal (Corporate)</option>
+                            <option>Friendly & Casual</option>
+                            <option>Bold & Modern (Edgy)</option>
+                            <option>Luxury & Premium</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2 class="text-xl font-bold text-purple-400 mb-6 flex items-center gap-2">
+                    <span class="bg-purple-500/20 w-8 h-8 rounded-full flex items-center justify-center text-sm">3</span>
+                    Content & Structure
+                </h2>
+
+                <div class="space-y-8">
+                    <div class="p-4 bg-slate-800 rounded-xl border border-white/5">
+                        <h3 class="font-bold text-white mb-4">Hero Section (Above the Fold)</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="form-label">Main Headline *</label>
+                                <span class="form-sublabel">The first thing visitors see. Make it catchy.</span>
+                                <input type="text" name="HeroTitle" required class="form-input" placeholder="Turnkey Renovations with 5-Year Warranty">
+                            </div>
+                            <div>
+                                <label class="form-label">Subheadline</label>
+                                <input type="text" name="HeroSubtitle" class="form-input" placeholder="Free estimate. No hidden fees.">
+                            </div>
+                            <div>
+                                <label class="form-label">Primary Button Text *</label>
+                                <input type="text" name="HeroButton" required class="form-input" placeholder="Get a Quote / Download Price List">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="form-label">Menu Items</label>
+                        <span class="form-sublabel">What should be in the navigation bar?</span>
+                        <input type="text" name="Menu" class="form-input" placeholder="About, Services, Pricing, Reviews, Contact">
+                    </div>
+
+                    <div>
+                        <label class="form-label">Products or Services List *</label>
+                        <span class="form-sublabel">Name + Price. If the list is long, paste a Google Sheets link.</span>
+                        <textarea name="ProductsList" rows="6" required class="form-textarea" placeholder="1. Service A — $100&#10;2. Service B — $200..."></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">Footer Details *</label>
+                        <span class="form-sublabel">Contacts and info for the bottom of the site.</span>
+                        <textarea name="FooterContacts" rows="4" required class="form-textarea" placeholder="Phone: +1...&#10;Address: ...&#10;Email: ...&#10;Social Media Links: ..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2 class="text-xl font-bold text-purple-400 mb-6 flex items-center gap-2">
+                    <span class="bg-purple-500/20 w-8 h-8 rounded-full flex items-center justify-center text-sm">4</span>
+                    Design & Visuals
+                </h2>
+                <div class="space-y-6">
+                    <div>
+                        <label class="form-label">References (Sites you like) *</label>
+                        <span class="form-sublabel">Please provide 2-3 links. Explain WHAT you like (colors, layout, fonts).</span>
+                        <textarea name="DesignRefs" rows="3" required class="form-textarea"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">Anti-References (Sites you dislike)</label>
+                        <span class="form-sublabel">What should we strictly AVOID? (e.g., Red color, pop-ups)</span>
+                        <textarea name="AntiRefs" rows="2" class="form-textarea"></textarea>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="form-label">Color Preferences *</label>
+                            <input type="text" name="Colors" required class="form-input" placeholder="Dark background, blue buttons...">
+                        </div>
+                        <div>
+                            <label class="form-label">Shape Style</label>
+                            <select name="ShapeStyle" class="form-select">
+                                <option>Rounded (Soft & Modern)</option>
+                                <option>Sharp Corners (Strict & Corporate)</option>
+                                <option>Designer's Choice</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Fonts</label>
+                            <select name="FontPreferences" class="form-select">
+                                <option>Modern Sans-Serif (Clean, like this site)</option>
+                                <option>Classic Serif (Traditional)</option>
+                                <option>Designer's Choice</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Animations</label>
+                            <select name="Animations" class="form-select">
+                                <option>Moderate (Smooth fade-ins)</option>
+                                <option>Minimal (Focus on speed)</option>
+                                <option>Active (Wow-effects)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2 class="text-xl font-bold text-purple-400 mb-6 flex items-center gap-2">
+                    <span class="bg-purple-500/20 w-8 h-8 rounded-full flex items-center justify-center text-sm">5</span>
+                    Technical Info
+                </h2>
+                <div class="space-y-6">
+                    <div>
+                        <label class="form-label">Domain Name *</label>
+                        <input type="text" name="Domain" required class="form-input" placeholder="mycompany.com">
+                        <p class="text-xs text-gray-500 mt-2">We will discuss registration details securely via chat/email.</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="form-label">Analytics?</label>
+                            <select name="Analytics" class="form-select">
+                                <option>Yes, Google Analytics / Pixel</option>
+                                <option>No, not needed</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Chat Widgets?</label>
+                            <input type="text" name="ChatWidget" class="form-input" placeholder="Do you need WhatsApp/Messenger button?">
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 p-4 rounded-lg border border-dashed border-gray-600">
+                        <p class="font-bold text-white mb-2">Assets (Logo & Photos)</p>
+                        <p class="text-sm text-gray-400 mb-4">
+                            Please upload your logo and photos to <b>Google Drive / Dropbox</b> and paste the link here.
+                        </p>
+                        <label class="form-label">Link to assets *</label>
+                        <input type="text" name="CloudLink" class="form-input" placeholder="https://drive.google.com/...">
+                        <div class="mt-2">
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" name="NoPhotos" class="rounded bg-slate-700 border-gray-600 text-purple-600">
+                                <span class="ml-2 text-sm text-gray-400">I don't have photos, please use stock images (free)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="form-label">Promo Code</label>
+                        <input type="text" name="PromoCode" class="form-input w-1/3" placeholder="Optional">
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass p-8 rounded-3xl border-2 border-purple-500/20 mb-8">
+                <h3 class="font-bold text-white mb-4">Final Agreement</h3>
+                <div class="space-y-4">
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox" required class="mt-1 w-5 h-5 rounded bg-slate-800 border-gray-600 text-purple-600 focus:ring-purple-500">
+                        <span class="text-sm text-gray-300">I confirm that the website will be developed <b>strictly based on this brief</b>.</span>
+                    </label>
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox" required class="mt-1 w-5 h-5 rounded bg-slate-800 border-gray-600 text-purple-600 focus:ring-purple-500">
+                        <span class="text-sm text-gray-300">I understand that design changes requested after final delivery are charged separately ($40/hour).</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full py-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl font-bold text-xl sm:text-2xl hover:scale-[1.02] transition transform shadow-2xl shadow-purple-500/50 mb-12">
+                Launch Project 🚀
+            </button>
+
+        </form>
+    </div>
+
+    <script>
+        // Generate Stars Background
+        function generateStars() {
+            const container = document.getElementById('starsContainer');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.opacity = Math.random() * 0.5 + 0.1;
+                container.appendChild(star);
+            }
+        }
+        generateStars();
+
+        // Auto-fill Order ID from URL
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('order');
+            if (orderId) {
+                document.getElementById('orderIdField').value = orderId;
+            }
+        });
+
+        // Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
